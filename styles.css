@@ -1,0 +1,13 @@
+.wrapper-vertical {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.wrapper-horizontal {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
