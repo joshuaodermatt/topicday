@@ -1,13 +1,11 @@
 const width = 640;
 const heigth = 480;
+let state = 'collection'
 
 let video;
 let facemesh;
 let predictions = [];
 let model;
-let trainingData = [];
-let state = 'collection'
-
 
 function setup() {
     createCanvas(width, heigth);
@@ -48,7 +46,6 @@ function setup() {
     video.size(width, heigth);
 
     facemesh = ml5.facemesh(video);
-
     facemesh.on("predict", results => {
         predictions = results;
     });
@@ -92,10 +89,7 @@ function recordExpression(label) {
         model.addData(inputs, target)
     } else if (state === 'prediction') {
         model.classify(inputs, getResults);
-
     }
-
-    console.log(inputs)
 }
 
 function getResults(error, results) {
@@ -103,10 +97,7 @@ function getResults(error, results) {
         console.error(error);
         return;
     }
-    console.log(results)
-
     let output = document.getElementById('output');
-
     output.textContent ='Output: ' + results[0].label + ' Confidence: ' + getPercentage(results[0].confidence);
 }
 
@@ -119,10 +110,8 @@ function drawKeypoints() {
     for (let i = 0; i < predictions.length; i += 1) {
         const keypoints = predictions[i].scaledMesh;
 
-        // Draw facial keypoints.
         for (let j = 0; j < keypoints.length; j += 1) {
             const [x, y] = keypoints[j];
-
             fill(0, 255, 0);
             ellipse(x, y, 5, 5);
         }
@@ -131,7 +120,6 @@ function drawKeypoints() {
 
 function train() {
     state = 'training'
-    console.log('Starting Training')
     model.normalizeData();
     let options = {
         epochs: 200,
@@ -139,12 +127,9 @@ function train() {
     model.train(options, whileTraining, finishedTraining)
 }
 
-function whileTraining(epoch, loss) {
-    console.log(epoch)
-}
+function whileTraining(epoch, loss) {}
 
 function finishedTraining() {
-    console.log('finished Training')
     state = 'prediction'
 }
 
