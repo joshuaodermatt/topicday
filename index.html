@@ -9,6 +9,7 @@
     <h1>Mood Scanner</h1>
         <div class="wrapper-vertical">
             <div class="wrapper-horizontal">
+                <p>Loading camera...</p>
                 <main>
                 </main>
             </div>
@@ -16,11 +17,13 @@
                 <button onclick="recordExpression('Smile')" class="button">Smile</button>
                 <button onclick="recordExpression('Wow')" class="button">Wow</button>
                 <button onclick="recordExpression('Neutral')" class="button">Neutral</button>
+                <button onclick="recordExpression('Angry')" class="button">Angry</button>
             </div>
 
             <div class="containerTraining">
             <button onclick="train()" class="button">Train</button>
             <button onclick="recordExpression('')" class="button">Get Expression</button>
+            <button onclick="showMesh()" class="button" id="faceMeshButton">Show Face Mesh</button>
             </div>
         </div>
         <h1 id="output">Output: </h1>

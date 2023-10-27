@@ -54,5 +54,11 @@ h1:first-child{
     margin: 0px;
 }
 
+p{
+    z-index: -999;
+    position: absolute;
+    text-align: center;
+    color: white;
+}
 
 

@@ -1,11 +1,14 @@
 const width = 640;
 const heigth = 480;
+
 let state = 'collection'
+let showFaceMesh = false;
 
 let video;
 let facemesh;
 let predictions = [];
 let model;
+
 
 function setup() {
     createCanvas(width, heigth);
@@ -34,7 +37,24 @@ function setup() {
             'upperInnerZEnd',
             'upperOuterXEnd',
             'upperOuterYEnd',
-            'upperOuterZEnd'],
+            'upperOuterZEnd',
+            'noseTipX',
+            'noseTipY',
+            'noseTipZ',
+            'leftEyebrowUpperX',
+            'leftEyebrowUpperY',
+            'leftEyebrowUpperZ',
+            'leftEyebrowLowerX',
+            'leftEyebrowLowerY',
+            'leftEyebrowLowerZ',
+            'rightEyebrowUpperX',
+            'rightEyebrowUpperY',
+            'rightEyebrowUpperZ',
+            'rightEyebrowLowerX',
+            'rightEyebrowLowerY',
+            'rightEyebrowLowerZ'
+
+        ],
         outputs: ['label'],
         task: 'classification',
         debug: true
@@ -80,7 +100,22 @@ function recordExpression(label) {
         upperInnerZEnd: annotations.lipsUpperInner[annotations.lipsUpperInner.length - 1][2],
         upperOuterXEnd: annotations.lipsUpperOuter[annotations.lipsUpperOuter.length - 1][0],
         upperOuterYEnd: annotations.lipsUpperOuter[annotations.lipsUpperOuter.length - 1][1],
-        upperOuterZEnd: annotations.lipsUpperOuter[annotations.lipsUpperOuter.length - 1][2]
+        upperOuterZEnd: annotations.lipsUpperOuter[annotations.lipsUpperOuter.length - 1][2],
+        noseTipX: annotations.noseTip[0][0],
+        noseTipY: annotations.noseTip[0][1],
+        noseTipZ: annotations.noseTip[0][2],
+        leftEyebrowUpperX: annotations.leftEyebrowUpper[3][0],
+        leftEyebrowUpperY: annotations.leftEyebrowUpper[3][1],
+        leftEyebrowUpperZ: annotations.leftEyebrowUpper[3][2],
+        leftEyebrowLowerX: annotations.leftEyebrowLower[3][0],
+        leftEyebrowLowerY: annotations.leftEyebrowLower[3][1],
+        leftEyebrowLowerZ: annotations.leftEyebrowLower[3][2],
+        rightEyebrowUpperX: annotations.rightEyebrowUpper[3][0],
+        rightEyebrowUpperY: annotations.rightEyebrowUpper[3][1],
+        rightEyebrowUpperZ: annotations.rightEyebrowUpper[3][2],
+        rightEyebrowLowerX: annotations.rightEyebrowLower[3][0],
+        rightEyebrowLowerY: annotations.rightEyebrowLower[3][1],
+        rightEyebrowLowerZ: annotations.rightEyebrowLower[3][2]
     };
     if (state === 'collection') {
         let target = {
@@ -102,8 +137,14 @@ function getResults(error, results) {
 }
 
 function draw() {
+    let faceMeshText = document.getElementById("faceMeshButton")
     image(video, 0, 0, width, heigth)
-    drawKeypoints()
+    if (showFaceMesh) {
+        drawKeypoints();
+        faceMeshText.textContent = "Hide Face Mesh"
+    } else {
+        faceMeshText.textContent = "Show Face Mesh"
+    }
 }
 
 function drawKeypoints() {
@@ -135,4 +176,8 @@ function finishedTraining() {
 
 function getPercentage(confidence) {
     return (confidence * 100) + '%'
+}
+
+function showMesh() {
+    showFaceMesh = !showFaceMesh
 }
