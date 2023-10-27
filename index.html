@@ -6,15 +6,22 @@
         <link rel="stylesheet" href="./styles.css">
     </head>
     <body>
+    <h1>Mood Scanner</h1>
         <div class="wrapper-vertical">
             <div class="wrapper-horizontal">
                 <main>
                 </main>
             </div>
-            <button onclick="recordExpression('Smile')">Smile</button>
-            <button onclick="recordExpression('Wow')">Wow</button>
-            <br>
-            <button onclick="train()">Train</button>
+            <div class="container">
+                <button onclick="recordExpression('Smile')" class="button">Smile</button>
+                <button onclick="recordExpression('Wow')" class="button">Wow</button>
+                <button onclick="recordExpression('Neutral')" class="button">Neutral</button>
+            </div>
+
+            <div class="containerTraining">
+            <button onclick="train()" class="button">Train</button>
+            <button onclick="recordExpression('')" class="button">Get Expression</button>
+            </div>
         </div>
         <h1 id="output">Output: </h1>
     </body>

@@ -24,7 +24,19 @@ function setup() {
             'upperInnerZ',
             'upperOuterX',
             'upperOuterY',
-            'upperOuterZ'],
+            'upperOuterZ',
+            'lowerInnerXEnd',
+            'lowerInnerYEnd',
+            'lowerInnerZEnd',
+            'lowerOuterXEnd',
+            'lowerOuterYEnd',
+            'lowerOuterZEnd',
+            'upperInnerXEnd',
+            'upperInnerYEnd',
+            'upperInnerZEnd',
+            'upperOuterXEnd',
+            'upperOuterYEnd',
+            'upperOuterZEnd'],
         outputs: ['label'],
         task: 'classification',
         debug: true
@@ -59,7 +71,19 @@ function recordExpression(label) {
         upperInnerZ: annotations.lipsUpperInner[0][2],
         upperOuterX: annotations.lipsUpperOuter[0][0],
         upperOuterY: annotations.lipsUpperOuter[0][1],
-        upperOuterZ: annotations.lipsUpperOuter[0][2]
+        upperOuterZ: annotations.lipsUpperOuter[0][2],
+        lowerInnerXEnd: annotations.lipsLowerInner[annotations.lipsLowerInner.length - 1][0],
+        lowerInnerYEnd: annotations.lipsLowerInner[annotations.lipsLowerInner.length - 1][1],
+        lowerInnerZEnd: annotations.lipsLowerInner[annotations.lipsLowerInner.length - 1][2],
+        lowerOuterXEnd: annotations.lipsLowerOuter[annotations.lipsLowerOuter.length - 1][0],
+        lowerOuterYEnd: annotations.lipsLowerOuter[annotations.lipsLowerOuter.length - 1][1],
+        lowerOuterZEnd: annotations.lipsLowerOuter[annotations.lipsLowerOuter.length - 1][2],
+        upperInnerXEnd: annotations.lipsUpperInner[annotations.lipsUpperInner.length - 1][0],
+        upperInnerYEnd: annotations.lipsUpperInner[annotations.lipsUpperInner.length - 1][1],
+        upperInnerZEnd: annotations.lipsUpperInner[annotations.lipsUpperInner.length - 1][2],
+        upperOuterXEnd: annotations.lipsUpperOuter[annotations.lipsUpperOuter.length - 1][0],
+        upperOuterYEnd: annotations.lipsUpperOuter[annotations.lipsUpperOuter.length - 1][1],
+        upperOuterZEnd: annotations.lipsUpperOuter[annotations.lipsUpperOuter.length - 1][2]
     };
     if (state === 'collection') {
         let target = {
@@ -82,7 +106,8 @@ function getResults(error, results) {
     console.log(results)
 
     let output = document.getElementById('output');
-    output.textContent ='Output: ' + results[0].label + ' Confidence: ' +results[0].confidence;
+
+    output.textContent ='Output: ' + results[0].label + ' Confidence: ' + getPercentage(results[0].confidence);
 }
 
 function draw() {
@@ -123,3 +148,6 @@ function finishedTraining() {
     state = 'prediction'
 }
 
+function getPercentage(confidence) {
+    return (confidence * 100) + '%'
+}

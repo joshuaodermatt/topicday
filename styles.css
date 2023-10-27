@@ -1,13 +1,58 @@
+body{
+    background-color: #575757;
+    text-align: center;
+}
+
 .wrapper-vertical {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
+    height: 80vh;
 }
 
 .wrapper-horizontal {
-
     display: flex;
     justify-content: center;
     flex-direction: row;
 }
+
+main{
+    border: white 5px solid;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px;
+}
+
+.containerTraining{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+button {
+    font-size: 25px;
+    border-radius: 10px;
+    width: 50vw;
+    margin: 10px 10px;
+}
+
+h1{
+    color: white;
+    font-family: Arial;
+}
+
+h1:first-child{
+    border-bottom: white 1px solid;
+    margin: 0px;
+}
+
+
+
